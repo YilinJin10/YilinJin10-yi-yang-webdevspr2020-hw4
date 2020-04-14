@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 // Recall how exports work in Node.js?
-const ShorterURLSchema = require('./shorter_url.schema').ShorterURLSchema;
+const ShorterURLSchema = require('./shorter_url.schema');
 
 // Here we are mapping our PokemonSchema to the model Pokemon.
 // If we are interested in referencing the Pokemon model elsewhere,
 // we can simply do mongoose.model("Pokemon") elsewhere
-const ShorterURLModel = mongoose.model("Shorter_URL", ShorterURLSchema);
+const ShorterURLModel = mongoose.model("shorter_url", ShorterURLSchema);
 
 function insertURL(shorterURL) {
     return ShorterURLModel.create(shorterURL);
@@ -33,11 +33,21 @@ function findURLById(id) {
 }
 
 function updateURL(id, shorterURL) {
-    return ShorterURLModel.update({_id: id}, {$set: shorterURL})
+    return ShorterURLModel.updateOne({_id: id}, {$set: shorterURL})
 }
 
 function deleteURL(id) {
     return ShorterURLModel.deleteOne({_id: id});
+}
+
+function deleteAll() {
+    //return ShorterURLModel.deleteMany({}, callback);
+    return ShorterURLModel.deleteMany({}, function(err) {
+            if (err) {
+                console.log(err)
+            }
+        }
+    );
 }
 // Make sure to export a function after you create it!
 module.exports = {
@@ -46,5 +56,6 @@ module.exports = {
     findURLByData,
     getAllURL,
     updateURL,
-    deleteURL
+    deleteURL,
+    deleteAll
 };

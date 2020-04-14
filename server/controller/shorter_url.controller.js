@@ -9,14 +9,15 @@ router.get('/', (req, res) => URLAccessor.getAllURL()
     .then(urls => res.send(urls)));
 
 router.post('/', (req, res) => {
-    console.log(req.body.url);
+    // console.log(req.body.url);
     let urlData = req.body.url;
     //let brand = req.body.brand;
     //TODO: branded hashing
     URLAccessor.findURLByData(urlData)
         .then((response) => {
             if (response) {
-                res.status(200).send(btoa(response._id));
+                //res.status(200).send(btoa(response._id));
+                res.status(200).send(response._id);
             } else {
                 console.log('entry does not exist, creating new');
                 return URLAccessor.insertURL(req.body)
