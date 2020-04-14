@@ -16,8 +16,8 @@ router.post('/', (req, res) => {
     URLAccessor.findURLByData(urlData)
         .then((response) => {
             if (response) {
-                //res.status(200).send(btoa(response._id));
-                res.status(200).send(response._id);
+                res.status(200).send(btoa(response._id));
+                //res.status(200).send(response);
             } else {
                 console.log('entry does not exist, creating new');
                 return URLAccessor.insertURL(req.body)
