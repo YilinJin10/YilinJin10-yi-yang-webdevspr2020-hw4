@@ -1,6 +1,7 @@
 const express = require('express');
 // const user = require('./controller/user.controller');
 const shorten = require('./controller/shorter_url.controller');
+const branded = require('./controller/branded.controller');
 // const item = require('./controller/items.controller');
 
 const app = express();
@@ -38,6 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 // Note that it is common practice got backend APIs in Node to start with the api prefix
 // to distinguish them from frontend routes
 app.use('/api/shorten', shorten);
+app.use('/api/branded', branded);
 
 app.listen(3001, function() {
     console.log('Starting server');
