@@ -10,7 +10,19 @@ function shortened(state = [], action) {
     return state;
 }
 
+
+function getURL(state = [], action) {
+    switch (action.type) {
+        case 'RECEIVED_URL':
+            console.log("in reducer")
+            console.dir(action)
+            return action.url.data;
+    }
+    return state;
+}
+
 export default combineReducers({
-    shortened
+    shortened,
+    getURL
 });
 

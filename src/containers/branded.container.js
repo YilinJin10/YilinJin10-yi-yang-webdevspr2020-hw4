@@ -58,8 +58,8 @@ class brandedShorten extends React.Component {
     }
 
     renderShortedURL() {
-        // console.log("in container")
-        // console.dir(this.props.brandedShorten);
+        //console.log("in container")
+        //console.dir(this.props.brandedShorten);
         return this.props.brandedShorten
     }
 }

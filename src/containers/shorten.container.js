@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {saveURL, clear} from '../actions/shorten.action'
+import {saveURL} from '../actions/shorten.action'
 import {Redirect} from "react-router";
 
 class shortenURL extends React.Component {
