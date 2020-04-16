@@ -54,6 +54,11 @@ function receiveURL(url) {
         url: url
     }
 }
+function errorURL(url) {
+    return {
+        type: "ERROR"
+    }
+}
 
 export function getURL(url) {
     console.log("in redirect action:");
@@ -64,7 +69,7 @@ export function getURL(url) {
         dispatch(inFlight());
         return Axios.get(`/api/shorten/`.concat(key))
             .then(response => dispatch(receiveURL(response)),
-                error => dispatch()
+                error => dispatch(errorURL())
             )
     }
 }

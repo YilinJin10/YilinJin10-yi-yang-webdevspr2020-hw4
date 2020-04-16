@@ -15,9 +15,10 @@ function shortened(state = [], action) {
 function getURL(state = [], action) {
     switch (action.type) {
         case 'RECEIVED_URL':
-            console.log("in reducer")
-            console.dir(action)
+            console.log("entered received_url!!!");
             return action.url.data;
+        case 'ERROR':
+            return null;
     }
     return state;
 }
