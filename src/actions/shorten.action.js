@@ -13,10 +13,23 @@ function sendSuccess(url) {
     }
 }
 
+function inFlight() {
+    return {
+        type: "REQUEST_INFLIGHT"
+    }
+}
+
 function sendFailure(error) {
     return {
         type: "SEND_FAILURE",
         error
+    }
+}
+
+function receiveHash(hash) {
+    return {
+        type: "HASH_RECEIVED",
+        hash: hash
     }
 }
 
@@ -25,11 +38,11 @@ export function saveURL(url) {
     const requestBody = {
         url: url.url
     }
-    return function (dispatch) {
-        dispatch(sendAttempt());
-        return Axios.post('/api/shorten', requestBody)
-            .then(response => dispatch(sendSuccess(response.url)),
-                error => dispatch(loginFailure(error.response))
-            );
+    return function(dispatch) {
+        dispatch(inFlight());
+        return Axios.post(`/api/shorten`, requestBody)
+            .then(response => dispatch(receiveHash(response)),
+                error => dispatch()
+            )
     }
 }

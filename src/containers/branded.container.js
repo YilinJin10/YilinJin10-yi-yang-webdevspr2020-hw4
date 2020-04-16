@@ -1,12 +1,12 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {saveURL, clear} from '../actions/shorten.action'
+import {saveURL} from '../actions/branded.action'
 import {Redirect} from "react-router";
 
-class shortenURL extends React.Component {
+class brandedShorten extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {url: '', shortened: ''};
+        this.state = {url: '', brand: ''};
     }
 
     handleChange(event, value) {
@@ -43,6 +43,12 @@ class shortenURL extends React.Component {
                                disabled={this.props.inFlight}
                                value={this.state.url}
                                onChange={(e) => this.handleChange(e, 'url')}/> </label>
+                    <label>
+                        brand:
+                        <input type="text"
+                               disabled={this.props.inFlight}
+                               value={this.state.brand}
+                               onChange={(e) => this.handleChange(e, 'brand')}/> </label>
                     <input type="submit" value="Submit" disabled={this.props.inFlight}/>
                 </form>
                 <h4>shortened url is:</h4>
@@ -53,8 +59,8 @@ class shortenURL extends React.Component {
 
     renderShortedURL() {
         console.log("in container")
-        console.dir(this.props.shortenURL);
-        //return this.props.shortenURL
+        console.dir(this.props.brandedShorten);
+        return this.props.brandedShorten
     }
 }
 
@@ -68,11 +74,11 @@ function mapDispatchToProps(dispatch, props) {
 
 function mapStateToProps(state, props) {
     return {
-        shortenURL: state.shorten.shortened
+        brandedShorten: state.branded.branded
     }
 };
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(shortenURL)
+)(brandedShorten)
