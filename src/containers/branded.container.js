@@ -115,7 +115,7 @@ class brandedShorten extends React.Component {
                 <div className="text">
 
                     <h4>Shortened url with brand:</h4>
-                    <p>{this.renderShortedURL()}</p>
+                    <h5>{this.renderShortedURL()}</h5>
                 </div>
 
             </div>

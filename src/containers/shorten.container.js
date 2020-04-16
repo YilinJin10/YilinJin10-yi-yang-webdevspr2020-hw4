@@ -81,8 +81,7 @@ class shortenURL extends React.Component {
                 </Container>
                 <div className="text">
                     <h4>Shortened url with hash:</h4>
-                    <p>{this.renderShortedURL()}</p>
-
+                    <h5>{this.renderShortedURL()}</h5>
                 </div>
             </div>
         );
