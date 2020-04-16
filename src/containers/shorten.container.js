@@ -52,9 +52,9 @@ class shortenURL extends React.Component {
     }
 
     renderShortedURL() {
-        console.log("in container")
-        console.dir(this.props.shortenURL);
-        //return this.props.shortenURL
+        // console.log("in container")
+        // console.dir(this.props.shortenURL);
+        return this.props.shortenURL
     }
 }
 

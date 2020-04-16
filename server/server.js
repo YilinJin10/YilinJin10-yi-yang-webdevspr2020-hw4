@@ -6,6 +6,7 @@ const branded = require('./controller/branded.controller');
 
 const urlModel = require('./model/shorter_url.model');
 const counterModel = require('./model/counter.model');
+const brandedModel = require('./model/branded.model');
 
 
 const app = express();
@@ -36,7 +37,8 @@ promise.then(function() {
     console.log('all url deleted!');
     counterModel.deleteAll();
     console.log('counter deleted!');
-
+    brandedModel.deleteAll();
+    console.log('all branded deleted!')
     // counterModel.getCount()
     //     .then((response) => {
     //         if (response) {

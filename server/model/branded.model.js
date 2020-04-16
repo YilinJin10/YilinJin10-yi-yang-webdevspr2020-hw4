@@ -39,11 +39,22 @@ function updateURL(id, shorterURL) {
 function deleteURL(id) {
     return brandedModel.deleteOne({_id: id});
 }
+
+function deleteAll() {
+    //return ShorterURLModel.deleteMany({}, callback);
+    return brandedModel.deleteMany({}, function(err) {
+            if (err) {
+                console.log(err)
+            }
+        }
+    );
+}
 // Make sure to export a function after you create it!
 module.exports = {
     findURLById,
     insertURL,
     getAllURL,
     updateURL,
-    deleteURL
+    deleteURL,
+    deleteAll
 };
