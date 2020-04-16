@@ -3,6 +3,12 @@ import {connect} from 'react-redux';
 import {updateURL, deleteURL,getURL} from '../actions/branded.action'
 import {Redirect} from "react-router";
 import constants from "../constants";
+import '../css/style.css';
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import {Container} from "react-bootstrap";
 
 class brandedEdit extends React.Component {
     constructor(props) {
@@ -12,7 +18,7 @@ class brandedEdit extends React.Component {
         const length = url.length;
         const key = url.substring(prefixLength, length);
         console.log(key);
-        this.state = {url: '', brand: key, isValid: ''};
+        this.state = {url: '', brand: key};
     }
 
     handleChange(event, value) {
@@ -52,21 +58,48 @@ class brandedEdit extends React.Component {
 
         return (
             <div>
-                <h4>current url: {this.getURLData()}</h4>
-                <form onSubmit={(e) => this.handleUpdate(e)}>
-                    {error}
-                    <label>
-                        edit url:
-                        <input type="text"
-                               disabled={this.checkBrand() || this.props.inFlight}
-                               value={this.state.url}
-                               onChange={(e) => this.handleChange(e, 'url')}/> </label>
-                    <input type="submit" value="Update" disabled={this.checkBrand() || this.props.inFlight}/>
-                </form>
-                <form onSubmit={(e) => this.handleDelete()}>
-                    {error}
-                    <input disabled={this.checkBrand() || this.props.inFlight} type="submit" value="Delete"/>
-                </form>
+                <h1>Current url matching this brand: {this.getURLData()}</h1>
+
+                <Container>
+                    <Row>
+                        <Col lg={3} sm={0}></Col>
+                        <Col lg={6} sm={12}>
+                            <Form>
+                                <Form.Group>
+                                    <Form.Label>EDIT URL:</Form.Label>
+                                    <Form.Control disabled={this.checkBrand() || this.props.inFlight}
+                                                  value={this.state.url}
+                                                  onChange={(e) => this.handleChange(e, 'url')} />
+                                </Form.Group>
+                            </Form>
+                        </Col>
+                        <Col lg={3} sm={0}></Col>
+                    </Row>
+
+                    <Row>
+                        <Col lg={3} sm={0}></Col>
+                        <Col lg={6} sm={12}>
+                            <Button
+                                variant="primary" size="md"
+                                title="Submit"
+                                type="submit" value="Update"
+                                disabled={this.checkBrand() || this.props.inFlight}
+                                onClick={(e) => this.handleUpdate(e)}
+                            >Update</Button>
+
+
+                            <Button
+                                variant="danger" size="md"
+                                title="Delete"
+                                type="submit"
+                                value="Delete"
+                                disabled={this.checkBrand() || this.props.inFlight}
+                                onClick={(e) => this.handleDelete(e)}
+                            >Delete</Button>
+                        </Col>
+                        <Col lg={3} sm={0}></Col>
+                    </Row>
+                </Container>
             </div>
         );
     }

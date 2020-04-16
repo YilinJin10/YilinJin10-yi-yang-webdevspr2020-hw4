@@ -7,3 +7,21 @@ h1 {
     padding-bottom: 50px;
     text-align: center;
 }
+
+.text {
+    margin-top: 80px;
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+p{
+    font-size: 12px;
+}
+
+Button {
+    margin-left: 10px;
+    margin-right: 10px;
+}

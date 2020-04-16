@@ -3,6 +3,11 @@ import {connect} from 'react-redux';
 import {updateURL, deleteURL,getURL} from '../actions/shorten.action'
 import {Redirect} from "react-router";
 import constants from "../constants";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import {Container} from "react-bootstrap";
 
 class unbrandedEdit extends React.Component {
     constructor(props) {
@@ -20,8 +25,14 @@ class unbrandedEdit extends React.Component {
     }
 
     handleUpdate(event) {
-        this.props.updateURL(this.state);
-        event.preventDefault();
+        if (this.state.url === '') {
+            alert('url cannot be empty')
+        } else if (!constants.validate(this.state.url)) {
+            alert('the input url is not valid')
+        } else {
+            this.props.updateURL(this.state);
+            event.preventDefault();
+        }
     }
 
     handleDelete() {
@@ -46,35 +57,61 @@ class unbrandedEdit extends React.Component {
 
         return (
             <div>
-                <h4>current url: {this.getURLData()}</h4>
-                <form onSubmit={(e) => this.handleUpdate(e)}>
-                    {error}
-                    <label>
-                        edit url:
-                        <input type="text"
-                               disabled={this.checkBrand() || this.props.inFlight}
-                               value={this.state.url}
-                               onChange={(e) => this.handleChange(e, 'url')}/> </label>
-                    <input type="submit" value="Update" disabled={this.checkBrand() || this.props.inFlight}/>
-                </form>
-                <form onSubmit={(e) => this.handleDelete()}>
-                    {error}
-                    <input type="submit" value="Delete" disabled={this.checkBrand() || this.props.inFlight}/>
-                </form>
+                <h1>Current url matching this hash: {this.getURLData()}</h1>
+
+                <Container>
+                    <Row>
+                        <Col lg={3} sm={0}></Col>
+                        <Col lg={6} sm={12}>
+                            <Form>
+                                <Form.Group>
+                                    <Form.Label>EDIT URL:</Form.Label>
+                                    <Form.Control disabled={this.checkBrand()}
+                                                  value={this.state.url}
+                                                  onChange={(e) => this.handleChange(e, 'url')} />
+                                </Form.Group>
+                            </Form>
+                        </Col>
+                        <Col lg={3} sm={0}></Col>
+                    </Row>
+
+                    <Row>
+                        <Col lg={3} sm={0}></Col>
+                        <Col lg={6} sm={12}>
+                            <Button
+                                variant="primary" size="md"
+                                title="Submit"
+                                type="submit" value="Update"
+                                disabled={this.checkBrand() || this.props.inFlight}
+                                onClick={(e) => this.handleUpdate(e)}
+                            >Update</Button>
+
+                            <Button
+                                variant="danger" size="md"
+                                title="Delete"
+                                type="submit"
+                                value="Delete"
+                                disabled={this.checkBrand() || this.props.inFlight}
+                                onClick={(e) => this.handleDelete(e)}
+                            >Delete</Button>
+                        </Col>
+                        <Col lg={3} sm={0}></Col>
+                    </Row>
+                </Container>
             </div>
         );
     }
 
     getURLData() {
+        this.props.requestURL(this.state);
         if (this.props.getURL === 'not found') {
             alert("invalid hashed url")
         }
-        this.props.requestURL(this.state);
         return this.props.getURL
     }
 
     checkBrand() {
-        constants.checkKeyExits(this.props.getURL);
+        return constants.checkKeyExits(this.props.getURL)
     }
 }
 

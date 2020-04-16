@@ -8,8 +8,6 @@ import {
     BrowserRouter, Switch,
     Route, Redirect, Link
 } from "react-router-dom";
-// import UserLogin from "./containers/login.container";
-// import Pokemons from "./containers/pokemons.container";
 // import Register from "./containers/register.container";
 import brandedEdit from "./containers/brandedEdit.container";
 import unbrandedEdit from "./containers/unbrandedEdit.container";

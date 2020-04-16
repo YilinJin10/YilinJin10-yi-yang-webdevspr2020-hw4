@@ -3,6 +3,11 @@ import {connect} from 'react-redux';
 import {saveURL} from '../actions/branded.action'
 import {Redirect} from "react-router";
 import constants from "../constants";
+import {Container} from "react-bootstrap";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 
 class brandedShorten extends React.Component {
@@ -53,26 +58,66 @@ class brandedShorten extends React.Component {
 
         return (
             <div>
-                <form onSubmit={(e) => this.handleSubmit(e)}>
-                    {error}
-                    <label>
-                        url:
-                        <input type="text"
-                               disabled={this.props.inFlight}
-                               value={this.state.url}
-                               onChange={(e) => this.handleChange(e, 'url')}/> </label>
-                    <label>
-                        brand:
-                        <input type="text"
-                               disabled={this.props.inFlight}
-                               value={this.state.brand}
-                               onChange={(e) => this.handleChange(e, 'brand')}/> </label>
-                    <input type="submit" value="Submit" disabled={this.props.inFlight}/>
-                </form>
-                <h4>shortened url is:</h4>
-                <div>{this.renderShortedURL()}</div>
-                <h4>to edit an url, please go to:</h4>
-                <div>{this.renderShortedEdit()}</div>
+                <Container>
+                    <Row>
+                        <Col lg={3} sm={0}></Col>
+                        <Col lg={6} sm={12}>
+                            <Form>
+                                <Form.Group>
+                                    <Form.Label>URL:</Form.Label>
+                                    <Form.Control disabled={this.props.inFlight}
+                                                  value={this.state.url}
+                                                  onChange={(e) => this.handleChange(e, 'url')} />
+                                </Form.Group>
+                            </Form>
+                        </Col>
+                        <Col lg={3} sm={0}></Col>
+                    </Row>
+
+                    <Row>
+                        <Col lg={3} sm={0}></Col>
+                        <Col lg={6} sm={12}>
+                            <Form>
+                                <Form.Group>
+                                    <Form.Label>BRAND:</Form.Label>
+                                    <Form.Control disabled={this.props.inFlight}
+                                                  value={this.state.brand}
+                                                  onChange={(e) => this.handleChange(e, 'brand')} />
+                                </Form.Group>
+                            </Form>
+                        </Col>
+                        <Col lg={3} sm={0}></Col>
+                    </Row>
+                    <Row>
+
+                        <Col lg={3} sm={0}></Col>
+                        <Col lg={6} sm={12}>
+                            <p>*To edit an submitted url, please go to:
+                                <span> {this.renderShortedEdit()}</span>
+                            </p>
+                        </Col>
+                        <Col lg={3} sm={0}></Col>
+                    </Row>
+                    <Row>
+
+                        <Col lg={3} sm={0}></Col>
+                        <Col lg={6} sm={12}>
+                            <Button
+                                variant="primary" size="md"
+                                title="Submit"
+                                onClick={(e) => this.handleSubmit(e)}
+                            >Submit</Button>
+                        </Col>
+                        <Col lg={3} sm={0}></Col>
+                    </Row>
+                </Container>
+
+                <div className="text">
+
+                    <h4>Shortened url with brand:</h4>
+                    <p>{this.renderShortedURL()}</p>
+                </div>
+
             </div>
         );
     }
