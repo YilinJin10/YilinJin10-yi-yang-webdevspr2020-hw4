@@ -11,8 +11,8 @@ import {
 // import UserLogin from "./containers/login.container";
 // import Pokemons from "./containers/pokemons.container";
 // import Register from "./containers/register.container";
-// import shortenURL from "./containers/shorten.container";
-// import brandedURL from "./containers/branded.container";
+import brandedEdit from "./containers/brandedEdit.container";
+import unbrandedEdit from "./containers/unbrandedEdit.container";
 import index from "./containers/index.container";
 import unbrandedRedirect from "./containers/unbrandedRedirect.container";
 import brandedRedirect from "./containers/brandedRedirect.container"
@@ -30,8 +30,8 @@ ReactDOM.render(
                 <Route path="/index" component={index}/>
                 <Route path="/unbranded/:hash" component={unbrandedRedirect}/>
                 <Route path="/branded/:brand" component={brandedRedirect}/>
-                {/*<Route path="/branded/:brand/edit" component={brandedEdit}/>*/}
-                {/*<Route path="/unbranded/:hash/edit" component={unbrandedEdit}/>*/}
+                <Route path="/edit/branded/:brand" component={brandedEdit}/>
+                <Route path="/unbranded/edit/:hash" component={unbrandedEdit}/>
                 {/*<Route path="/brand" component={brandedURL}/>*/}
                 {/*<Route path="/register" component={Register}/>*/}
                 {/*<Route path="/user/:username/pokemon" component={Pokemons}/>*/}
