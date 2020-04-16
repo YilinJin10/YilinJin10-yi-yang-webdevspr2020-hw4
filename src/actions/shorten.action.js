@@ -46,3 +46,55 @@ export function saveURL(url) {
             )
     }
 }
+
+function receiveURL(url) {
+    console.dir(url)
+    return {
+        type: "RECEIVED_URL",
+        url: url
+    }
+}
+
+export function getURL(url) {
+    console.log("in redirect action:");
+    console.log(url.hash);
+    const key = url.hash;
+
+    return function(dispatch) {
+        dispatch(inFlight());
+        return Axios.get(`/api/shorten/`.concat(key))
+            .then(response => dispatch(receiveURL(response)),
+                error => dispatch()
+            )
+    }
+}
+
+export function deleteURL(url) {
+    console.log("in delete action:");
+    console.log(url.hash);
+    const key = url.hash;
+
+    return function(dispatch) {
+        dispatch(inFlight());
+        return Axios.delete(`/api/shorten/`.concat(key).concat('/delete'))
+            .then(() => Axios.get(`/api/shorten/`.concat(key))
+                .then(response => dispatch(receiveURL(response)),
+                    error => dispatch()
+                ))
+    }
+}
+
+export function updateURL(url) {
+    const requestBody = {
+        url: url.url
+    };
+    const key = url.hash;
+    return function(dispatch) {
+        dispatch(inFlight());
+        return Axios.put(`/api/shorten/`.concat(key).concat('/edit'), requestBody)
+            .then(() => Axios.get(`/api/shorten/`.concat(key))
+                .then(response => dispatch(receiveURL(response)),
+                    error => dispatch()
+                ))
+    }
+}

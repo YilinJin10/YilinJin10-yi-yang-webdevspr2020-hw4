@@ -2,6 +2,8 @@ import React from "react";
 import {connect} from 'react-redux';
 import {saveURL} from '../actions/branded.action'
 import {Redirect} from "react-router";
+import constants from "../constants";
+
 
 class brandedShorten extends React.Component {
     constructor(props) {
@@ -9,13 +11,29 @@ class brandedShorten extends React.Component {
         this.state = {url: '', brand: ''};
     }
 
+    // validate(myURL) {
+    //     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    //         '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
+    //         '((\\d{1,3}\\.){3}\\d{1,3}))'+ // ip (v4) address
+    //         '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ //port
+    //         '(\\?[;&amp;a-z\\d%_.~+=-]*)?'+ // query string
+    //         '(\\#[-a-z\\d_]*)?$','i');
+    //     return pattern.test(myURL);
+    // }
+
     handleChange(event, value) {
         this.setState({[value]: event.target.value || ''});
     }
 
     handleSubmit(event) {
-        this.props.saveURL(this.state);
-        event.preventDefault();
+        if (this.state.url === '' || this.state.brand === '') {
+            alert('url and brand cannot be empty')
+        } else if (!constants.validate(this.state.url)) {
+            alert('the input url is not valid')
+        } else {
+            this.props.saveURL(this.state);
+            event.preventDefault();
+        }
     }
     //
     // componentDidMount() {
@@ -53,14 +71,18 @@ class brandedShorten extends React.Component {
                 </form>
                 <h4>shortened url is:</h4>
                 <div>{this.renderShortedURL()}</div>
+                <h4>to edit an url, please go to:</h4>
+                <div>{this.renderShortedEdit()}</div>
             </div>
         );
     }
 
     renderShortedURL() {
-        //console.log("in container")
-        //console.dir(this.props.brandedShorten);
         return this.props.brandedShorten
+    }
+
+    renderShortedEdit() {
+        return constants.brandedEdit.concat("{YOUR BRAND}");
     }
 }
 

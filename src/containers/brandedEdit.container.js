@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from 'react-redux';
 import {updateURL, deleteURL,getURL} from '../actions/branded.action'
 import {Redirect} from "react-router";
+import constants from "../constants";
 
 class brandedEdit extends React.Component {
     constructor(props) {
@@ -11,7 +12,7 @@ class brandedEdit extends React.Component {
         const length = url.length;
         const key = url.substring(prefixLength, length);
         console.log(key);
-        this.state = {url: '', brand: key};
+        this.state = {url: '', brand: key, isValid: ''};
     }
 
     handleChange(event, value) {
@@ -19,8 +20,14 @@ class brandedEdit extends React.Component {
     }
 
     handleUpdate(event) {
-        this.props.updateURL(this.state);
-        event.preventDefault();
+        if (this.state.url === '') {
+            alert('url cannot be empty')
+        } else if (!constants.validate(this.state.url)) {
+            alert('the input url is not valid')
+        } else {
+            this.props.updateURL(this.state);
+            event.preventDefault();
+        }
     }
 
     handleDelete() {
@@ -51,14 +58,14 @@ class brandedEdit extends React.Component {
                     <label>
                         edit url:
                         <input type="text"
-                               disabled={this.props.inFlight}
+                               disabled={this.checkBrand() || this.props.inFlight}
                                value={this.state.url}
                                onChange={(e) => this.handleChange(e, 'url')}/> </label>
-                    <input type="submit" value="Update" disabled={this.props.inFlight}/>
+                    <input type="submit" value="Update" disabled={this.checkBrand() || this.props.inFlight}/>
                 </form>
                 <form onSubmit={(e) => this.handleDelete()}>
                     {error}
-                    <input type="submit" value="Delete" disabled={this.props.inFlight}/>
+                    <input disabled={this.checkBrand() || this.props.inFlight} type="submit" value="Delete"/>
                 </form>
             </div>
         );
@@ -66,7 +73,18 @@ class brandedEdit extends React.Component {
 
     getURLData() {
         this.props.requestURL(this.state);
+        if (this.props.getURL === 'not found') {
+            alert("invalid brand")
+            //this.setState({isValid: false})
+        }
+        //this.setState({url: this.props.getURL, isValid: true})
         return this.props.getURL
+    }
+
+    checkBrand() {
+        // console.log(this.props.getURL === 'not found')
+        // return this.props.getURL === 'not found'
+        return  constants.checkKeyExits(this.props.getURL);
     }
 }
 

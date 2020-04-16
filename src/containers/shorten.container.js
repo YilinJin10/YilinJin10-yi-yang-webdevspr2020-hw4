@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from 'react-redux';
 import {saveURL} from '../actions/shorten.action'
 import {Redirect} from "react-router";
+import constants from "../constants";
 
 class shortenURL extends React.Component {
     constructor(props) {
@@ -14,14 +15,15 @@ class shortenURL extends React.Component {
     }
 
     handleSubmit(event) {
-        this.props.saveURL(this.state);
-        event.preventDefault();
+        if (this.state.url === '') {
+            alert('url and cannot be empty')
+        } else if (!constants.validate(this.state.url)) {
+            alert('the input url is not valid')
+        } else {
+            this.props.saveURL(this.state);
+            event.preventDefault();
+        }
     }
-    //
-    // componentDidMount() {
-    //     this.props.clear();
-    //     this.setState({url: '', shortened: ''});
-    // }
 
     render() {
         if (this.props.redirect) {
@@ -47,14 +49,18 @@ class shortenURL extends React.Component {
                 </form>
                 <h4>shortened url is:</h4>
                 <div>{this.renderShortedURL()}</div>
+                <h4>to edit an url, please go to:</h4>
+                <div>{this.renderShortedEdit()}</div>
             </div>
         );
     }
 
     renderShortedURL() {
-        // console.log("in container")
-        // console.dir(this.props.shortenURL);
         return this.props.shortenURL
+    }
+
+    renderShortedEdit() {
+        return constants.unbrandedEdit.concat("{YOUR HASH}")
     }
 }
 

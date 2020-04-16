@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {getURL} from '../actions/brandedRedirect.action';
+import {getURL} from '../actions/branded.action';
 import {Redirect} from "react-router";
 
 class brandedRedirect extends React.Component {
@@ -31,18 +31,33 @@ class brandedRedirect extends React.Component {
         );
     }
 
-    // componentDidMount() {
-    //     window.location.replace(this.props.brandedShorten);
-    // }
+    componentDidMount() {
+        this.receiveURL();
+        console.log(this.state.url)
+        window.location.replace(this.state.url);
+    }
 
     renderURL() {
         this.props.getURL(this.state);
     }
 
+    // receiveURL() {
+    //     console.dir(this.props.brandedShorten);
+    //     //this.setState({url: this.props.brandedShorten})
+    //     return this.props.brandedShorten
+    // }
+
     receiveURL() {
-        console.dir(this.props.brandedShorten);
-        //this.setState({url: this.props.brandedShorten})
-        return this.props.brandedShorten
+        // if (this.renderURL === 'not found') {
+        //     alert("invalid prams")
+        //     //TODO: redirect to home
+        // }
+        // //this.props.requestURL(this.state);
+        // return this.props.brandedShorten
+
+        console.dir(this.props.shorten);
+        this.setState({url: this.props.brandedShorten})
+        return this.props.shorten
     }
 }
 

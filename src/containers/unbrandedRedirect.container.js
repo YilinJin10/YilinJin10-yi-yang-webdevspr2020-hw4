@@ -1,7 +1,8 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {getURL} from '../actions/unbrandedRedirect.action';
+import {getURL} from '../actions/shorten.action';
 import {Redirect} from "react-router";
+import constants from "../constants";
 
 class unbrandedRedirect extends React.Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class unbrandedRedirect extends React.Component {
                 <h1>redirecting to ↓</h1>
                 {/*<h2>{this.renderURL()}</h2>*/}
                 <h2>{this.receiveURL()}</h2>
+
             </div>
         );
     }
@@ -40,10 +42,18 @@ class unbrandedRedirect extends React.Component {
     }
 
     receiveURL() {
+        // if (this.props.getURL === 'not found') {
+        //     alert("invalid prams")
+        //     //TODO: redirect to home
+        // }
+        // this.props.requestURL(this.state);
+        // return this.props.shorten
+
         console.dir(this.props.shorten);
         //this.setState({url: this.props.brandedShorten})
         return this.props.shorten
     }
+
 }
 
 

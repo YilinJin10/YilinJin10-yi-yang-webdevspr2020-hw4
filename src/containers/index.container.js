@@ -4,6 +4,7 @@ import {saveURL} from '../actions/branded.action'
 import BrandedURL from "./branded.container"
 import ShortenURL from "./shorten.container"
 import {Container, Tabs, Tab, Sonnet} from "react-bootstrap";
+import '../css/style.css';
 
 import {Redirect} from "react-router";
 

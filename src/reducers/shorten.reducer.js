@@ -1,11 +1,12 @@
 import {combineReducers} from "redux";
+import constants from "../constants"
 
 function shortened(state = [], action) {
     switch (action.type) {
         case 'HASH_RECEIVED':
             console.log("in reducer")
             console.dir(action)
-            return action.hash.data
+            return constants.unbrandedPrefix.concat(action.hash.data)
     }
     return state;
 }

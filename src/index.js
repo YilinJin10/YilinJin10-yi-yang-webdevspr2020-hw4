@@ -31,7 +31,7 @@ ReactDOM.render(
                 <Route path="/unbranded/:hash" component={unbrandedRedirect}/>
                 <Route path="/branded/:brand" component={brandedRedirect}/>
                 <Route path="/edit/branded/:brand" component={brandedEdit}/>
-                <Route path="/unbranded/edit/:hash" component={unbrandedEdit}/>
+                <Route path="/edit/unbranded/:hash" component={unbrandedEdit}/>
                 {/*<Route path="/brand" component={brandedURL}/>*/}
                 {/*<Route path="/register" component={Register}/>*/}
                 {/*<Route path="/user/:username/pokemon" component={Pokemons}/>*/}
