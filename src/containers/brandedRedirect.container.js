@@ -13,51 +13,36 @@ class brandedRedirect extends React.Component {
     }
 
     render() {
-        //const query = new URLSearchParams(this.props.location.search);
-        //const query = this.props.match.params.brand
-        //const token = query.get('brand');
-        const prefixLength = "/branded/".length
-        const key = this.props.location.pathname.substring(prefixLength, this.props.location.pathname.length);
-        console.log(this.props.location.pathname.substring(9, this.props.location.pathname.length));
-        //this.setState({brand: key});
-        //console.log("window location" + window.location);
         this.renderURL();
         return (
             <div>
-                <h1>redirecting to ↓</h1>
+                <h1>redirecting to </h1>
                 {/*<h2>{this.renderURL()}</h2>*/}
                 <h2>{this.receiveURL()}</h2>
             </div>
         );
     }
-
-    componentDidMount() {
-        this.receiveURL();
-        console.log(this.state.url)
-        window.location.replace(this.state.url);
-    }
-
     renderURL() {
+
         this.props.getURL(this.state);
     }
 
-    // receiveURL() {
-    //     console.dir(this.props.brandedShorten);
-    //     //this.setState({url: this.props.brandedShorten})
-    //     return this.props.brandedShorten
-    // }
+
+
 
     receiveURL() {
-        // if (this.renderURL === 'not found') {
-        //     alert("invalid prams")
-        //     //TODO: redirect to home
-        // }
-        // //this.props.requestURL(this.state);
-        // return this.props.brandedShorten
+        console.log("fewjoi");
 
-        console.dir(this.props.shorten);
-        this.setState({url: this.props.brandedShorten})
-        return this.props.shorten
+        console.dir(this.props.brandedShorten);
+        if (this.props.brandedShorten === null) {
+            alert("Invalid URL, will redirect to home page");
+            return <Redirect to='/index'/>
+        } else if (this.props.brandedShorten.length !== 0){
+            window.location.replace(this.props.brandedShorten);
+        } else {
+            //this.setState({url: this.props.brandedShorten})
+            return this.props.brandedShorten;
+        }
     }
 }
 

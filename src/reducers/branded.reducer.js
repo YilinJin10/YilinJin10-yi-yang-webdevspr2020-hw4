@@ -20,8 +20,10 @@ function getURL(state = [], action) {
     switch (action.type) {
         case 'URL_RECEIVED':
             console.log("in reducer")
-            console.dir(action)
+            console.dir(action);
             return action.url.data;
+        case 'ERROR':
+            return null;
     }
     return state;
 }

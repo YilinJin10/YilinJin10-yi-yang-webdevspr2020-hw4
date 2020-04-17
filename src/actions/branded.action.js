@@ -69,6 +69,12 @@ function receiveURL(url) {
     }
 }
 
+function errorURL(url) {
+    return {
+        type: "ERROR"
+    }
+}
+
 export function getURL(url) {
     console.log("in delete action:");
     console.log(url.brand);
@@ -77,7 +83,7 @@ export function getURL(url) {
         dispatch(inFlight());
         return Axios.get(`/api/branded/`.concat(key))
             .then(response => dispatch(receiveURL(response)),
-                error => dispatch()
+                error => dispatch(errorURL(error))
             )
     }
 }
