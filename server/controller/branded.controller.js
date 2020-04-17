@@ -31,14 +31,13 @@ router.get('/:brand', function (req, res) {
     let id = req.params.brand;
     BrandedAccessor.findURLById(id)
         .then((response) => {
-            if (response) {
-                // TODO: handle invalid url???
-                res.send(response.url);
+            if(response)  {
+
+                return res.status(200).send(response.url)
             } else {
-                res.send("not found")
-                //res.status(404).send(`Invalid url provided :${error}`);
-            }
-        });
+
+                return res.status(404).send(`Not Found`);
+            }});
 });
 
 router.put('/:brand/edit', function (req, res) {
