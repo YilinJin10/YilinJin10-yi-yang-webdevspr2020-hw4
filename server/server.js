@@ -29,9 +29,10 @@ let promise;
 // This is the default address for MongoDB.
 // Make sure MongoDB is running!
 const mongoEndpoint = 'mongodb://127.0.0.1/shorter_url';
+const remoteMongo = process.env.MONGODB_URI;
 // useNewUrlParser is not required, but the old parser is deprecated
 // promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
-promise = mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
 
 promise.then(function() {
     console.log('connected!');
@@ -83,7 +84,7 @@ app.use('/api/branded', branded);
 
 const port = process.env.PORT;
 
-app.listen(port, function() {
+app.listen(3001, function() {
     console.log('Starting server');
 });
 
