@@ -30,7 +30,7 @@ let promise;
 // Make sure MongoDB is running!
 const mongoEndpoint = 'mongodb://127.0.0.1/shorter_url';
 const remoteMongo = process.env.MONGODB_URI;
-const uri = process.env.MONGODB_URL;
+const uri = process.env.MONGODB_URI;
 const options = {
     useNewUrlParser: true,
     useCreateIndex: true,
