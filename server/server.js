@@ -29,8 +29,6 @@ const http = require('http');
 // This is the default address for MongoDB.
 // Make sure MongoDB is running!
 const mongoEndpoint = 'mongodb://127.0.0.1/shorter_url';
-const remoteMongo = process.env.MONGODB_URI;
-// const mongo = "mongodb://heroku_m0trd6gq:@ds351628.mlab.com:51628/heroku_m0trd6gq"
 const uri = process.env.MONGODB_URI;
 
 // useNewUrlParser is not required, but the old parser is deprecated
@@ -65,7 +63,7 @@ app.use('/api/branded', branded);
 
 const port = process.env.PORT;
 
-app.listen(port || 3001, function() {
+app.listen(3001, function() {
     console.log('Starting server');
 });
 
