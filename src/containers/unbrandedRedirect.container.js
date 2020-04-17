@@ -13,6 +13,13 @@ class unbrandedRedirect extends React.Component {
         this.state = {hash: key, url:''};
     }
 
+
+    componentDidMount() {
+
+
+    }
+
+
     render() {
         //const query = new URLSearchParams(this.props.location.search);
         //const query = this.props.match.params.brand
@@ -25,7 +32,7 @@ class unbrandedRedirect extends React.Component {
         this.renderURL();
         return (
             <div>
-                <h1>redirecting to ↓</h1>
+                <h1>redirecting to </h1>
                 {/*<h2>{this.renderURL()}</h2>*/}
                 <h2>{this.receiveURL()}</h2>
 
@@ -33,11 +40,10 @@ class unbrandedRedirect extends React.Component {
         );
     }
 
-    // componentDidMount() {
-    //     window.location.replace(this.props.brandedShorten);
-    // }
+
 
     renderURL() {
+
         this.props.getURL(this.state);
     }
 
@@ -49,9 +55,20 @@ class unbrandedRedirect extends React.Component {
         // this.props.requestURL(this.state);
         // return this.props.shorten
 
+        // if(this.props.shorten !== undefined) {
+        //     window.location.replace(this.props.shorten);
+        // }
+        console.log("shorten!!!!!!");
         console.dir(this.props.shorten);
-        //this.setState({url: this.props.brandedShorten})
-        return this.props.shorten
+        if (this.props.shorten === null) {
+            alert("Invalid URL, will redirect to home page");
+            return <Redirect to='/index'/>
+        } else if (this.props.shorten.length !== 0){
+            window.location.replace(this.props.shorten);
+        } else {
+            //this.setState({url: this.props.brandedShorten})
+            return this.props.shorten;
+        }
     }
 
 }

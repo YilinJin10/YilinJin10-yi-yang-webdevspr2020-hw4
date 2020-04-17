@@ -34,13 +34,10 @@ router.get('/:hash', function (req, res) {
     let id = atob(baseid);
     URLAccessor.findURLById(id)
         .then((response) => {
-            if (response) {
-                res.send(response.url);
-            } else {
-                res.send("not found")
-                //res.status(404).send(`Invalid url provided :${error}`);
-            }
-        });
+            return res.status(200).send(response.url)},
+            error => {
+                return res.status(404).send(`Not Found:${error}`);
+            });
 });
 
 router.put('/:hash/edit', function (req, res) {
