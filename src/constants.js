@@ -1,8 +1,8 @@
 const constants = {
-    brandedPrefix: "http://localhost:3000/branded/",
-    unbrandedPrefix: "http://localhost:3000/unbranded/",
-    brandedEdit: "http://localhost:3000/edit/branded/",
-    unbrandedEdit: "http://localhost:3000/edit/unbranded/",
+    brandedPrefix: "https://morning-scrubland-17060.herokuapp.com/branded/",
+    unbrandedPrefix: "https://morning-scrubland-17060.herokuapp.com/unbranded/",
+    brandedEdit: "https://morning-scrubland-17060.herokuapp.com/edit/branded/",
+    unbrandedEdit: "https://morning-scrubland-17060.herokuapp.com/edit/unbranded/",
     brandExits: "this brand has existed, please input a new one",
     validate : function (myURL) {
         let pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
