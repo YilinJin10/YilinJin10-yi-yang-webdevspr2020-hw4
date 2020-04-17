@@ -30,9 +30,16 @@ let promise;
 // Make sure MongoDB is running!
 const mongoEndpoint = 'mongodb://127.0.0.1/shorter_url';
 const remoteMongo = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URL;
+const options = {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+    family: 4 // Use IPv4, skip trying IPv6
+};
 // useNewUrlParser is not required, but the old parser is deprecated
 // promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
-promise = mongoose.connect(remoteMongo, { useNewUrlParser: true });
+promise = mongoose.connect(uri, options);
 
 promise.then(function() {
     console.log('connected!');
@@ -84,7 +91,7 @@ app.use('/api/branded', branded);
 
 const port = process.env.PORT;
 
-app.listen(port, function() {
+app.listen(port || 3000, function() {
     console.log('Starting server');
 });
 
