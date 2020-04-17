@@ -32,7 +32,7 @@ const mongoEndpoint = 'mongodb://127.0.0.1/shorter_url';
 const remoteMongo = process.env.MONGODB_URI;
 // useNewUrlParser is not required, but the old parser is deprecated
 // promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
-promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
+promise = mongoose.connect(remoteMongo, { useNewUrlParser: true });
 
 promise.then(function() {
     console.log('connected!');
@@ -84,7 +84,7 @@ app.use('/api/branded', branded);
 
 const port = process.env.PORT;
 
-app.listen(3001, function() {
+app.listen(port, function() {
     console.log('Starting server');
 });
 
