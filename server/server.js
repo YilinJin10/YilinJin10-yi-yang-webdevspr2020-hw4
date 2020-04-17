@@ -30,6 +30,7 @@ let promise;
 // Make sure MongoDB is running!
 const mongoEndpoint = 'mongodb://127.0.0.1/shorter_url';
 const remoteMongo = process.env.MONGODB_URI;
+const mongo = "mongodb://heroku_m0trd6gq:@ds351628.mlab.com:51628/heroku_m0trd6gq"
 const uri = process.env.MONGODB_URI;
 const options = {
     useNewUrlParser: true,
@@ -39,7 +40,7 @@ const options = {
 };
 // useNewUrlParser is not required, but the old parser is deprecated
 // promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
-promise = mongoose.connect(uri, options);
+promise = mongoose.connect(mongo, options);
 
 promise.then(function() {
     console.log('connected!');
