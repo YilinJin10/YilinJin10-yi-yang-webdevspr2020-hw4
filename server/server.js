@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 // const user = require('./controller/user.controller');
 const shorten = require('./controller/shorter_url.controller');
@@ -29,7 +30,8 @@ let promise;
 // Make sure MongoDB is running!
 const mongoEndpoint = 'mongodb://127.0.0.1/shorter_url';
 // useNewUrlParser is not required, but the old parser is deprecated
-promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
+// promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || mongoEndpoint);
 
 promise.then(function() {
     console.log('connected!');
@@ -78,7 +80,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/shorten', shorten);
 app.use('/api/branded', branded);
 
-app.listen(3001, function() {
+
+const port = process.env.PORT || 3000;
+
+app.listen(port, function() {
     console.log('Starting server');
 });
 

@@ -13,6 +13,7 @@
     "body-parser": "^1.15.2",
     "bootstrap": "^4.4.1",
     "btoa": "^1.1.2",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.9",
     "node-env-run": "^3.0.2",
