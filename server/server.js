@@ -22,7 +22,7 @@ const atob = require('atob');
 const bodyParser = require('body-parser');
 
 const http = require('http');
-let promise;
+
 
 
 
@@ -30,49 +30,22 @@ let promise;
 // Make sure MongoDB is running!
 const mongoEndpoint = 'mongodb://127.0.0.1/shorter_url';
 const remoteMongo = process.env.MONGODB_URI;
-const mongo = "mongodb://heroku_m0trd6gq:@ds351628.mlab.com:51628/heroku_m0trd6gq"
+// const mongo = "mongodb://heroku_m0trd6gq:@ds351628.mlab.com:51628/heroku_m0trd6gq"
 const uri = process.env.MONGODB_URI;
-const options = {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    family: 4 // Use IPv4, skip trying IPv6
-};
+
 // useNewUrlParser is not required, but the old parser is deprecated
 // promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
-promise = mongoose.connect(mongo, options);
+mongoose.connect(uri || mongoEndpoint, {useNewUrlParser: true});
 
-promise.then(function() {
-    console.log('connected!');
-    urlModel.deleteAll();
-    console.log('all url deleted!');
-    counterModel.deleteAll();
-    console.log('counter deleted!');
-    brandedModel.deleteAll();
-    console.log('all branded deleted!')
-    // counterModel.getCount()
-    //     .then((response) => {
-    //         if (response) {
-    //             res.send("current" + response.count);
-    //         } else {
-    //             res.send("count not found");
-    //         }
-    //     });
-
-    // counterModel.insert({_id: 'url_count', count: 0});
-    // console.log('counter inserted!');
-    // urlModel.deleteAll({}, function() {
-    //     console.log('URL collection removed');
-    // });
-    // counterModel.deleteAll({}, function() {
-    //     console.log('Counter collection removed');
-    //     let counter = new counterModel({_id: 'url_count', count: 10000});
-    //     counter.save(function(err) {
-    //         if(err) return console.error(err);
-    //         console.log('counter inserted');
-    //     });
-    // });
-});
+// promise.then(function() {
+//     console.log('connected!');
+//     urlModel.deleteAll();
+//     console.log('all url deleted!');
+//     counterModel.deleteAll();
+//     console.log('counter deleted!');
+//     brandedModel.deleteAll();
+//     console.log('all branded deleted!')
+// });
 
 // Get the connection string
 const db = mongoose.connection;
@@ -92,7 +65,7 @@ app.use('/api/branded', branded);
 
 const port = process.env.PORT;
 
-app.listen(port || 3000, function() {
+app.listen(port || 3001, function() {
     console.log('Starting server');
 });
 

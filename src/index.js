@@ -33,7 +33,7 @@ ReactDOM.render(
                 {/*<Route path="/brand" component={brandedURL}/>*/}
                 {/*<Route path="/register" component={Register}/>*/}
                 {/*<Route path="/user/:username/pokemon" component={Pokemons}/>*/}
-                <Redirect exact from="/" to="index"/>
+                <Redirect exact from="/" to="/index"/>
             </Switch>
         </BrowserRouter>
     </Provider>,
