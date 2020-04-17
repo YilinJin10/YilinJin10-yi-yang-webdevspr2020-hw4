@@ -61,8 +61,6 @@ app.use('/api/shorten', shorten);
 app.use('/api/branded', branded);
 
 
-const port = process.env.PORT;
-
 app.listen(3001, function() {
     console.log('Starting server');
 });
