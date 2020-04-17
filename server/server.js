@@ -31,7 +31,7 @@ let promise;
 const mongoEndpoint = 'mongodb://127.0.0.1/shorter_url';
 // useNewUrlParser is not required, but the old parser is deprecated
 // promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
-promise = mongoose.connect(process.env.MONGODB_URI);
+promise = mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
 promise.then(function() {
     console.log('connected!');
@@ -81,7 +81,7 @@ app.use('/api/shorten', shorten);
 app.use('/api/branded', branded);
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.listen(port, function() {
     console.log('Starting server');
