@@ -21,8 +21,8 @@ const userStore = createStore(reducers, applyMiddleware(thunkMiddleware));
 ReactDOM.render(
     <Provider store={userStore}>
         <BrowserRouter>
-        {/*<Link to={'/shorten'}>Login</Link>&nbsp;*/}
-        {/*<Link to={'/brand'}>Register</Link>*/}
+            {/*<Link to={'/shorten'}>Login</Link>&nbsp;*/}
+            {/*<Link to={'/brand'}>Register</Link>*/}
             <Switch>
                 {/*<Route path="/shorten" component={shortenURL}/>*/}
                 <Route path="/index" component={index}/>
