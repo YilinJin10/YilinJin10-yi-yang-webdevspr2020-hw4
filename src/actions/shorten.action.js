@@ -41,8 +41,7 @@ export function saveURL(url) {
     return function(dispatch) {
         dispatch(inFlight());
         return Axios.post(`/api/shorten`, requestBody)
-            .then(response => dispatch(receiveURL(response)),
-                error => dispatch()
+            .then(response => dispatch(receiveURL(response))
             )
     }
 }
