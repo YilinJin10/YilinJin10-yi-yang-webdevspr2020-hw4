@@ -34,14 +34,14 @@ function receiveHash(hash) {
 }
 
 export function saveURL(url) {
+    console.log(url);
     const requestBody = {
-        _id: url.brand,
-        url: url.url,
+        url: url.url
     }
     return function(dispatch) {
         dispatch(inFlight());
         return Axios.post(`/api/shorten`, requestBody)
-            .then(response => dispatch(receiveURL(response)),
+            .then(response => dispatch(receiveHash(response)),
                 error => dispatch()
             )
     }
