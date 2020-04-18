@@ -40,7 +40,7 @@ const options = {
 };
 // useNewUrlParser is not required, but the old parser is deprecated
 // promise = mongoose.connect(mongoEndpoint, { useNewUrlParser: true });
-promise = mongoose.connect(mongoEndpoint, {useNewUrlParser : true});
+promise = mongoose.connect(uri, {useNewUrlParser : true});
 
 promise.then(function() {
     console.log("connected");
