@@ -134,7 +134,7 @@ function mapDispatchToProps(dispatch, props) {
 function mapStateToProps(state, props) {
     return {
         getURL: state.branded.getURL,
-        getUDeleted: state.branded.getDeleted
+        redirect: state.branded.redirect
     }
 };
 

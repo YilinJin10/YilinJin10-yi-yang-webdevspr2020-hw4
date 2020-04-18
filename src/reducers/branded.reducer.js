@@ -22,14 +22,26 @@ function getURL(state = [], action) {
             console.log("in reducer")
             console.dir(action);
             return action.url.data;
-        case 'ERROR':
-            return null;
+    }
+    return state;
+}
+
+function redirect(state = '', action) {
+    switch (action.type) {
+        case 'DELETED_IN_BRANDED' :
+            console.log("calling redirect in reducer");
+            alert("deletion successful, will redirect to home page")
+            return '/index';
+        case 'ERROR_IN_BRANDED' :
+            alert("invalid brand url provided, will redirect to home page")
+            return '/index';
     }
     return state;
 }
 
 export default combineReducers({
     branded,
-    getURL
+    getURL,
+    redirect
 });
 

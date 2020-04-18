@@ -17,15 +17,27 @@ function getURL(state = [], action) {
         case 'RECEIVED_URL':
             console.log("entered received_url!!!");
             return action.url.data;
-        case 'ERROR':
-            console.log("this is not found!!!");
-            return null;
+    }
+    return state;
+}
+
+function redirect(state = '', action) {
+    console.log(action.type);
+    switch (action.type) {
+        case 'DELETED' :
+            console.log("calling redirect in reducer");
+            alert("deletion successful, will redirect to home page")
+            return '/index';
+        case 'ERROR' :
+            alert("invalid url provided, will redirect to home page")
+            return '/index';
     }
     return state;
 }
 
 export default combineReducers({
     shortened,
-    getURL
+    getURL,
+    redirect
 });
 

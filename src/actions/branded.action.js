@@ -67,7 +67,7 @@ function receiveURL(url) {
 
 function errorURL(url) {
     return {
-        type: "ERROR"
+        type: "ERROR_IN_BRANDED"
     }
 }
 
@@ -92,7 +92,12 @@ export function deleteURL(url) {
     return function(dispatch) {
         dispatch(inFlight());
         return Axios.delete(`/api/branded/`.concat(url.brand).concat('/delete'))
-            .then(() => Axios.get(`/api/branded/`.concat(url.brand))
-                .then(response => dispatch(receiveURL(response))))
+            .then((response) => dispatch(deleteSuccess()))
+    }
+}
+
+function deleteSuccess() {
+    return {
+        type: "DELETED_IN_BRANDED"
     }
 }

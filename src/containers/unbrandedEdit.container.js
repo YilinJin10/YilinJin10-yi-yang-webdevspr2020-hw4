@@ -37,11 +37,6 @@ class unbrandedEdit extends React.Component {
 
     handleDelete() {
         this.props.deleteURL(this.state);
-        this.props.requestURL(this.state);
-        if (this.props.receiveURL === null) {
-            alert("Hashed URL deleted, will redirect to home page");
-            return <Redirect to='/index'/>
-        }
         event.preventDefault()
     }
     //
@@ -109,18 +104,34 @@ class unbrandedEdit extends React.Component {
 
     getURLData() {
         this.props.requestURL(this.state);
-        console.log(this.props.receiveURL.length === 0);
-        if (this.props.receiveURL.length === 0) {
-            alert("Invalid URL, will redirect to home page");
-            return <Redirect to='/index'/>
-        } else {
-            return this.props.receiveURL
-        }
+        // console.log(this.props.receiveURL.length === 0);
+        // if (this.props.receiveURL === null && this.props.receiveURL.length !== 0) {
+        //     alert("Invalid URL, will redirect to home page");
+        //     return <Redirect to='/index'/>
+        // } else {
+        //     return this.props.receiveURL
+        // }
+        return this.props.receiveURL
     }
 
     checkBrand() {
         return constants.checkKeyExits(this.props.getURL)
     }
+
+    // renderURL() {
+    //     this.props.requestURL(this.state);
+    // }
+
+    // receiveURL() {
+    //     console.dir(this.props.receiveURL);
+    //     if (this.props.receiveURL === null) {
+    //         alert("Invalid URL, will redirect to home page");
+    //         return <Redirect to='/index'/>
+    //     } else {
+    //         //this.setState({url: this.props.brandedShorten})
+    //         return this.props.shorten;
+    //     }
+    // }
 }
 
 
@@ -136,6 +147,7 @@ function mapDispatchToProps(dispatch, props) {
 function mapStateToProps(state, props) {
     return {
         receiveURL: state.shorten.getURL,
+        redirect: state.shorten.redirect
     }
 };
 

@@ -53,6 +53,7 @@ function receiveURL(url) {
         url: url
     }
 }
+
 function errorURL(url) {
     return {
         type: "ERROR"
@@ -81,8 +82,14 @@ export function deleteURL(url) {
     return function(dispatch) {
         dispatch(inFlight());
         return Axios.delete(`/api/shorten/`.concat(key).concat('/delete'))
-            .then(() => Axios.get(`/api/shorten/`.concat(key))
-                .then(response => dispatch(receiveURL(response))))
+            .then((respnse) => dispatch(deleteSuccess()))
+    }
+}
+
+function deleteSuccess() {
+    console.log("calling delete success in action");
+    return {
+        type: "DELETED"
     }
 }
 
