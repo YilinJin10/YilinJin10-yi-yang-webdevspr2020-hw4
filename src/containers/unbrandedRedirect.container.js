@@ -21,6 +21,9 @@ class unbrandedRedirect extends React.Component {
 
 
     render() {
+        if (this.props.redirect) {
+            return (<Redirect to={this.props.redirect}/>)
+        }
         //const query = new URLSearchParams(this.props.location.search);
         //const query = this.props.match.params.brand
         //const token = query.get('brand');
@@ -82,7 +85,8 @@ function mapDispatchToProps(dispatch, props) {
 
 function mapStateToProps(state, props) {
     return {
-        shorten: state.shorten.getURL
+        shorten: state.shorten.getURL,
+        redirect: state.shorten.redirect
     }
 };
 

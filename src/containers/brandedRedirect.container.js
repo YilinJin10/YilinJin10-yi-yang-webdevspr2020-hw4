@@ -13,6 +13,9 @@ class brandedRedirect extends React.Component {
     }
 
     render() {
+        if (this.props.redirect) {
+            return (<Redirect to={this.props.redirect}/>)
+        }
         this.renderURL();
         return (
             <div>
@@ -54,7 +57,8 @@ function mapDispatchToProps(dispatch, props) {
 
 function mapStateToProps(state, props) {
     return {
-        brandedShorten: state.branded.getURL
+        brandedShorten: state.branded.getURL,
+        redirect: state.branded.redirect
     }
 };
 
