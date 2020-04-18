@@ -41,8 +41,7 @@ export function saveURL(url) {
     return function(dispatch) {
         dispatch(inFlight());
         return Axios.post(`/api/shorten`, requestBody)
-            .then(response => dispatch(receiveHash(response)),
-                error => dispatch()
+            .then(response => dispatch(receiveHash(response))
             )
     }
 }
@@ -83,9 +82,7 @@ export function deleteURL(url) {
         dispatch(inFlight());
         return Axios.delete(`/api/shorten/`.concat(key).concat('/delete'))
             .then(() => Axios.get(`/api/shorten/`.concat(key))
-                .then(response => dispatch(receiveURL(response)),
-                    error => dispatch()
-                ))
+                .then(response => dispatch(receiveURL(response))))
     }
 }
 
@@ -98,8 +95,6 @@ export function updateURL(url) {
         dispatch(inFlight());
         return Axios.put(`/api/shorten/`.concat(key).concat('/edit'), requestBody)
             .then(() => Axios.get(`/api/shorten/`.concat(key))
-                .then(response => dispatch(receiveURL(response)),
-                    error => dispatch()
-                ))
+                .then(response => dispatch(receiveURL(response))))
     }
 }
