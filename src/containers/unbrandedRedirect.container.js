@@ -43,7 +43,6 @@ class unbrandedRedirect extends React.Component {
 
 
     renderURL() {
-
         this.props.getURL(this.state);
     }
 

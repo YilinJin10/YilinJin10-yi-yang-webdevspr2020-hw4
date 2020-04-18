@@ -18,6 +18,7 @@ function getURL(state = [], action) {
             console.log("entered received_url!!!");
             return action.url.data;
         case 'ERROR':
+            console.log("this is not found!!!");
             return null;
     }
     return state;

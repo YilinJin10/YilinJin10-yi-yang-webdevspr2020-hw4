@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {updateURL, deleteURL,getURL} from '../actions/shorten.action'
+import {updateURL, deleteURL, getURL} from '../actions/shorten.action'
 import {Redirect} from "react-router";
 import constants from "../constants";
 import Row from "react-bootstrap/Row";
@@ -37,6 +37,11 @@ class unbrandedEdit extends React.Component {
 
     handleDelete() {
         this.props.deleteURL(this.state);
+        this.props.requestURL(this.state);
+        if (this.props.receiveURL === null) {
+            alert("Hashed URL deleted, will redirect to home page");
+            return <Redirect to='/index'/>
+        }
         event.preventDefault()
     }
     //
@@ -104,10 +109,13 @@ class unbrandedEdit extends React.Component {
 
     getURLData() {
         this.props.requestURL(this.state);
-        if (this.props.getURL === 'not found') {
-            alert("invalid hashed url")
+        console.log(this.props.receiveURL.length === 0);
+        if (this.props.receiveURL.length === 0) {
+            alert("Invalid URL, will redirect to home page");
+            return <Redirect to='/index'/>
+        } else {
+            return this.props.receiveURL
         }
-        return this.props.getURL
     }
 
     checkBrand() {
@@ -127,8 +135,7 @@ function mapDispatchToProps(dispatch, props) {
 
 function mapStateToProps(state, props) {
     return {
-        getURL: state.shorten.getURL,
-        getUDeleted: state.shorten.getDeleted
+        receiveURL: state.shorten.getURL,
     }
 };
 
