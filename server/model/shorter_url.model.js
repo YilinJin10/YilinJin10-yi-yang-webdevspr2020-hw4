@@ -18,13 +18,6 @@ function findURLByData(data) {
 function getAllURL() {
     return ShorterURLModel.find().exec();
 }
-// function getAllPokemon() {
-//     return PokemonModel.find().exec();
-// }
-
-// function findPokemonById(id) {
-//     return ShorterURLModel.find({_id: id}).exec();
-// }
 
 // Mongo provides a findById to query for the _id field (and you don't have
 // to use the ObjectId class here!

@@ -28,8 +28,6 @@ class brandedRedirect extends React.Component {
     }
 
 
-
-
     receiveURL() {
         console.log("fewjoi");
 

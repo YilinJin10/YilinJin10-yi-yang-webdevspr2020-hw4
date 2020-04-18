@@ -20,16 +20,22 @@ function getCount() {
 
 function deleteAll() {
     //return counterModel.remove({});
-    counterModel.remove({}, function() {
+
+    return counterModel.deleteMany({}, function(err) {
         console.log('Counter collection removed');
         counterModel.create({_id: 'url_count', count: 0})
+        console.log('Counter reset to 0');
         // let counter = new counterModel({_id: 'url_count', count: 10000});
         // counter.save(function(err) {
         //     if(err) return console.error(err);
         //     console.log('counter inserted');
         // });
+        if (err) {
+            console.log(err)
+        }
     });
 }
+
 
 function insert(counter) {
     return counterModel.create(counter);
